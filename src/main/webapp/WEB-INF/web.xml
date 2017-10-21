@@ -6,4 +6,18 @@
 
 	<display-name>websocket</display-name>
 
+	<listener>  
+	  	<listener-class>com.rode.listener.WebContextListener</listener-class>  
+	</listener> 
+	<servlet>
+		<servlet-name>TestServlet</servlet-name>
+		<servlet-class>com.rode.servlet.MessageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestServlet</servlet-name>
+		<url-pattern>/TestServlet</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
