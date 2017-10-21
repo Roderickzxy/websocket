@@ -7,8 +7,8 @@ var ws = new WebSocket("ws://127.0.0.1:8888");
 ws.onopen = function()// 当websocket创建成功时，即会触发onopen事件
 {
 	var content = document.getElementById("content").value;
-	if (content == nullcontent == "") {
-		ws.send("XiaoFeng");// 用于叫消息发送到服务端 注：此处为用户名
+	if (content == null || content == "") {
+		ws.send("defalut: Roderick");// 用于叫消息发送到服务端 注：此处为用户名
 	} else {
 		ws.send(content);
 	}

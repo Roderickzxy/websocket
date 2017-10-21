@@ -20,7 +20,7 @@ public class MessageServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("content" + req.getParameter("content"));
+		System.out.println("content: " + req.getParameter("content"));
 		req.getSession().setAttribute("content", req.getParameter("content"));
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
