@@ -7,11 +7,26 @@
 var ws = new WebSocket("ws://127.0.0.1:8888");
 function login(){
 	var content = document.getElementById("content").value;
-	if (content == null || content == "") {
-		ws.send("defalut: Roderick");// 用于叫消息发送到服务端 注：此处为用户名
-	} else {
-		ws.send(content);
-	}
+	$.ajax({
+		url:'/websocket/TestServlet',
+		data: {name:content},
+		type:'POST',
+		async:false,
+		success: function(data){
+			if(data==200){
+				if (content == null || content == "") {
+					ws.send("defalut: Roderick");// 用于叫消息发送到服务端 注：此处为用户名
+				} else {
+					ws.send(content);
+				}
+			}else{
+				alert('login failed. please check backend logs.');
+			}
+		},
+		error:function(){
+			alert('login failed. please check your network.');
+		}
+	});
 }
 ws.onopen = function()// 当websocket创建成功时，即会触发onopen事件
 {

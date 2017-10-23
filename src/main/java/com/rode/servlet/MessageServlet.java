@@ -20,8 +20,10 @@ public class MessageServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("content: " + req.getParameter("content"));
-		req.getSession().setAttribute("content", req.getParameter("content"));
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		System.out.println("login name: " + req.getParameter("name"));
+		resp.setContentType("application/json;charset=utf8");
+		resp.getWriter().write("200");
+//		req.getSession().setAttribute("content", req.getParameter("content"));
+//		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 }
