@@ -17,11 +17,10 @@
 <script type="text/javascript" src="assets/js/websocket.js"></script>
 </head>
 <body>
-	<input type="hidden" value="${content }" id="content">
-	<form action="TestServlet" method="post">
-		content : <input type="text" name="content">
-		<button type="submit">登陆</button>
-	</form>
+	<!-- <form action="TestServlet" method="post"> -->
+		content : <input type="text" id="content" name="content">
+		<button onclick="login()">登陆</button>
+	<!-- </form> -->
 	<span id="span"> </span>
 </body>
 </html>
