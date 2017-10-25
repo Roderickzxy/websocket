@@ -5,25 +5,42 @@
  */
 
 var ws = new WebSocket("ws://127.0.0.1:8888");
+check_status();
+function check_status(){
+	$.ajax({
+		url:'/websocket/LoginServlet',
+		type: 'GET',
+		async:false,
+		success:function(json){
+			if(json.code==200){
+				$('#login_div').html('login user:'+json.data+'  <button>logout</button>');
+			}
+		},
+		error:function(json){
+			alert('cannot connect to server, please check your network and server\'s status.');
+		}
+	})
+}
 function login(){
 	var content = document.getElementById("content").value;
 	$.ajax({
-		url:'/websocket/TestServlet',
+		url:'/websocket/LoginServlet',
 		data: {name:content},
 		type:'POST',
 		async:false,
 		success: function(data){
 			if(data==200){
 				if (content == null || content == "") {
-					ws.send("defalut: Roderick");// 用于叫消息发送到服务端 注：此处为用户名
+					ws.send("tourist");// 用于叫消息发送到服务端 注：此处为用户名
 				} else {
 					ws.send(content);
 				}
+				$('#login_div').html('login user:'+content+'  <button>logout</button>');
 			}else{
 				alert('login failed. please check backend logs.');
 			}
 		},
-		error:function(){
+		error:function(data){
 			alert('login failed. please check your network.');
 		}
 	});

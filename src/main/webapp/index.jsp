@@ -18,10 +18,10 @@
 <script type="text/javascript" src="assets/js/websocket.js"></script>
 </head>
 <body>
-	<!-- <form action="TestServlet" method="post"> -->
-		content : <input type="text" id="content" name="content">
-		<button onclick="login()">登陆</button>
-	<!-- </form> -->
+	<div id="login_div">
+		username : <input type="text" id="content" name="content">
+		<button onclick="login()">login</button>
+	</div>
 	<span id="span"> </span>
 </body>
 </html>
