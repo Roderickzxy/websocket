@@ -13,7 +13,11 @@ ws.onopen = function()// 当websocket创建成功时，即会触发onopen事件
 };
 ws.onmessage = function(evt)// 当客户端收到服务端发来的消息时，会触发onmessage事件，参数evt.data中包含server传输过来的数据
 {
-	$("#span").append(evt.data+"</br>");
+	if(evt.data.indexOf('SYS:')==0){
+		$("#span").append(evt.data.substring(4)+"</br>");
+	}else{
+		$('#chat_content').append(evt.data.substring(5)+"</br>");
+	}
 };
 ws.onclose = function(evt)// 当客户端收到服务端发送的关闭连接的请求时，触发onclose事件
 {
@@ -34,14 +38,7 @@ function check_status(){
 				$('#system_msg').show();
 				$('#chat_area').show();
 				//定时任务，每1秒查看ws状态是否可发送
-				var t;
-				t=setInterval(function(){ 
-					if(ws.readyState == ws.OPEN) { 
-						clearInterval(t);
-						sendMsg(json.data);
-					} 
-				}, 500); 
-//				ws.send(json.data);
+				sendMsg(json.data);
 			}
 		},
 		error:function(json){
@@ -50,7 +47,16 @@ function check_status(){
 	})
 }
 function sendMsg(message){
-	ws.send(message);
+	var t;
+	t=setInterval(function(){ 
+		if(ws.readyState == ws.OPEN) { 
+			clearInterval(t);
+			ws.send(message);
+		} 
+	}, 200); 
+}
+function sendChatMsg(){
+	sendMsg($('#input_content').val());
 }
 function login(){
 	var content = document.getElementById("content").value;

@@ -75,6 +75,21 @@ public class WebSocketPool {
 		}
 	}
 
+	public static void sendMessageToOtherUsers(WebSocket conn, String message) {
+		Set<WebSocket> keySet = userconnections.keySet();
+		synchronized (keySet) {
+			for (WebSocket connTmp : keySet) {
+				if (conn == connTmp) {
+					continue;
+				}
+				String user = userconnections.get(connTmp);
+				if (user != null) {
+					connTmp.send(message);
+				}
+			}
+		}
+	}
+
 	/** * 向所有的用户发送消息 * @param message */
 	public static void sendMessage(String message) {
 		Set<WebSocket> keySet = userconnections.keySet();
@@ -100,4 +115,7 @@ public class WebSocketPool {
 		}
 	}
 
+	public static boolean containConnection(WebSocket conn) {
+		return userconnections.containsKey(conn);
+	}
 }

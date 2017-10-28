@@ -25,8 +25,10 @@
 	<div id="system_msg" style="display:none;float: left;border: double;padding: 10px;width: 21%;">
 		<span id="span"> </span>
 	</div>
-	<div id="chat_area" style="display:none;float: right;width: 75%;border: double;padding-bottom: 3%;">
-		<textarea rows="" cols="" style="width:100%;height: 400px;"></textarea>
+	<div id="chat_area" style="display:none;float: right;width: 75%;border: double;">
+		<div id="chat_content" style="width: 99%;height: 400px;padding: 10px;"></div>
+		<input id="input_content" style="float:left;width: 94%;" type="text" style="width: 96%;"/>
+		<button style="width: 6%;" onclick="sendChatMsg()">send</button>
 	</div>
 </body>
 </html>
