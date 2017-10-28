@@ -4,8 +4,11 @@
  * 2016-8-18
  */
 
-var ws = new WebSocket("ws://127.0.0.1:8888");
-check_status();
+var ws = new WebSocket("ws://127.0.0.1:18888");
+$(document).ready(function(){ 
+	check_status();
+});
+
 function check_status(){
 	$.ajax({
 		url:'/websocket/LoginServlet',
@@ -13,7 +16,7 @@ function check_status(){
 		async:false,
 		success:function(json){
 			if(json.code==200){
-				$('#login_div').html('login user:'+json.data+'  <button>logout</button>');
+				$('#login_div').html('<form action="/websocket/LogoutServlet" >login user:'+json.data+'  <input type="submit" method="post" value="logout"/></form>');
 			}
 		},
 		error:function(json){
@@ -35,7 +38,7 @@ function login(){
 				} else {
 					ws.send(content);
 				}
-				$('#login_div').html('login user:'+content+'  <button>logout</button>');
+				$('#login_div').html('<form action="/websocket/LogoutServlet" >login user:'+content+'  <input type="submit" method="post" value="logout"/></form>');
 			}else{
 				alert('login failed. please check backend logs.');
 			}
@@ -45,6 +48,7 @@ function login(){
 		}
 	});
 }
+
 ws.onopen = function()// 当websocket创建成功时，即会触发onopen事件
 {
 //	var content = document.getElementById("content").value;

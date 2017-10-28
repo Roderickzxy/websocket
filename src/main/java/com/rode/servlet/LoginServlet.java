@@ -17,7 +17,6 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// super.doPost(req, resp);
 		// 获取登录页面，判断是否有登录状态，有的话直接使用该用户登录
 		Object username = req.getSession().getAttribute(LOGIN_USERNAME);
 		resp.setContentType("application/json;charset=utf8");
@@ -34,8 +33,5 @@ public class LoginServlet extends HttpServlet {
 		req.getSession().setAttribute(LOGIN_USERNAME, req.getParameter("name"));
 		resp.setContentType("application/json;charset=utf8");
 		resp.getWriter().write("200");
-		// req.getSession().setAttribute("content",
-		// req.getParameter("content"));
-		// req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 }

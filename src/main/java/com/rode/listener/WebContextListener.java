@@ -11,11 +11,11 @@ import com.rode.websocket.WebSocket;
 
 public class WebContextListener implements ServletContextListener {
 
-    @Override
-    public void contextInitialized(ServletContextEvent sce) {
-    	System.out.println("开始启动websocket");
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		System.out.println("开始启动websocket");
 		WebSocketImpl.DEBUG = false;
-		int port = 8888; // 端口随便设置，只要不跟现有端口重复就可以
+		int port = 18888; // 端口随便设置，只要不跟现有端口重复就可以
 		WebSocket s = null;
 		try {
 			s = new WebSocket(port);
@@ -25,11 +25,11 @@ public class WebContextListener implements ServletContextListener {
 		}
 		s.start();
 		System.out.println("启动websocket成功！");
-    }
+	}
 
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("===========被销毁=============");
-    }
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		System.out.println("===========被销毁=============");
+	}
 
 }
