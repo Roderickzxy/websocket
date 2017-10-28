@@ -17,7 +17,7 @@ ws.onmessage = function(evt)// 当客户端收到服务端发来的消息时，�
 };
 ws.onclose = function(evt)// 当客户端收到服务端发送的关闭连接的请求时，触发onclose事件
 {
-	alert("WebSocketClosed!");
+	alert("connection interrupted!");
 };
 ws.onerror = function(evt)// 如果出现连接，处理，接收，发送数据失败的时候就会触发onerror事件
 {
@@ -31,6 +31,8 @@ function check_status(){
 		success:function(json){
 			if(json.code==200){
 				$('#login_div').html('<form action="/websocket/LogoutServlet" >login user:'+json.data+'  <input type="submit" method="post" value="logout"/></form>');
+				$('#system_msg').show();
+				$('#chat_area').show();
 				//定时任务，每1秒查看ws状态是否可发送
 				var t;
 				t=setInterval(function(){ 
@@ -38,7 +40,7 @@ function check_status(){
 						clearInterval(t);
 						sendMsg(json.data);
 					} 
-				}, 1000); 
+				}, 500); 
 //				ws.send(json.data);
 			}
 		},
@@ -65,6 +67,8 @@ function login(){
 					ws.send(content);
 				}
 				$('#login_div').html('<form action="/websocket/LogoutServlet" >login user:'+content+'  <input type="submit" method="post" value="logout"/></form>');
+				$('#system_msg').show();
+				$('#chat_area').show();
 			}else{
 				alert('login failed. please check backend logs.');
 			}

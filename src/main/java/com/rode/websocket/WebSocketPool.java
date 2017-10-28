@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.java_websocket.WebSocket;
 
 public class WebSocketPool {
 	private static final Map<WebSocket, String> userconnections = new HashMap<WebSocket, String>();
+	private static final List<String> onlineUsers = new ArrayList<>();
 
 	/** * 获取用户名 * @param session */
 	public static String getUserByKey(WebSocket conn) {
@@ -35,9 +37,14 @@ public class WebSocketPool {
 		return null;
 	}
 
+	public static boolean containUser(String user) {
+		return onlineUsers.contains(user);
+	}
+
 	/** * 向连接池中添加连接 * @param inbound */
 	public static void addUser(String user, WebSocket conn) {
 		userconnections.put(conn, user); // 添加连接
+		onlineUsers.add(user);
 	}
 
 	/** * 获取所有的在线用户 * @return */
@@ -54,6 +61,7 @@ public class WebSocketPool {
 	public static boolean removeUser(WebSocket conn) {
 		if (userconnections.containsKey(conn)) {
 			userconnections.remove(conn);// 移除连接
+			onlineUsers.remove(userconnections.get(conn));
 			return true;
 		} else {
 			return false;
@@ -79,4 +87,17 @@ public class WebSocketPool {
 			}
 		}
 	}
+
+	public static void forceOffLine(String username) {
+		if (onlineUsers.contains(username)) {
+			for (Map.Entry<WebSocket, String> entry : userconnections
+					.entrySet()) {
+				if (username.equals(entry.getValue())) {
+					entry.getKey().closeConnection(30001, "强制下线.");
+					break;
+				}
+			}
+		}
+	}
+
 }

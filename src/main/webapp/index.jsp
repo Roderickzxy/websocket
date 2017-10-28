@@ -17,11 +17,16 @@
 <script type="text/javascript" src="assets/js/jquery/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="assets/js/websocket.js"></script>
 </head>
-<body>
+<body style="width: 97%;height: 97%;">
 	<div id="login_div">
 		username : <input type="text" id="content" name="content">
 		<button onclick="login()">login</button>
 	</div>
-	<span id="span"> </span>
+	<div id="system_msg" style="display:none;float: left;border: double;padding: 10px;width: 21%;">
+		<span id="span"> </span>
+	</div>
+	<div id="chat_area" style="display:none;float: right;width: 75%;border: double;padding-bottom: 3%;">
+		<textarea rows="" cols="" style="width:100%;height: 400px;"></textarea>
+	</div>
 </body>
 </html>
