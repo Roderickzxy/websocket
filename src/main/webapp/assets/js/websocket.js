@@ -57,6 +57,7 @@ function sendMsg(message){
 }
 function sendChatMsg(){
 	sendMsg($('#input_content').val());
+	$('#input_content').val('');
 }
 function login(){
 	var content = document.getElementById("content").value;
