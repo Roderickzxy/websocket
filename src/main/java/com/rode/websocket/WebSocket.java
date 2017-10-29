@@ -52,14 +52,14 @@ public class WebSocket extends WebSocketServer {
 					conn,
 					USER_CODE + "<font style='color:green'>"
 							+ WebSocketPool.getUserByKey(conn) + "  "
-							+ SF.format(new Date()) + "</br>" + message
-							+ "</font>");
+							+ SF.format(new Date()) + "</font>" + "</br>"
+							+ message);
 			WebSocketPool.sendMessageToOtherUsers(
 					conn,
 					USER_CODE + "<font style='color:blue'>"
 							+ WebSocketPool.getUserByKey(conn) + "  "
-							+ SF.format(new Date()) + "</br>" + message
-							+ "</font>");
+							+ SF.format(new Date()) + "</font>" + "</br>"
+							+ message);
 		} else {
 			message = message.toString();
 			if (message != null) { // 将用户加入
