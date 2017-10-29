@@ -25,9 +25,11 @@
 	<div id="system_msg" style="display:none;float: left;border: double;padding: 10px;width: 21%;">
 		<span id="span"> </span>
 	</div>
-	<div id="chat_area" style="display:none;float: right;width: 75%;border: double;">
-		<div id="chat_content" style="width: 99%;height: 400px;padding: 10px;"></div>
-		<input id="input_content" style="float:left;width: 94%;" type="text" style="width: 96%;"/>
+	<div id="chat_area" style="float: right;width: 75%;border: double;height: 92%;">
+		<div id="chat_content" style="width: 98%;height: 92%;padding: 10px;overflow-y: auto;"></div>
+		<input id="input_content" style="float:left;width: 84%;" type="text"/>
+		<button style="width: 8%;" onclick="selectImage()">image</button>
+		<input type="file" style="display:none" onchange="changeImage(this)" id="image_select"/>
 		<button style="width: 6%;" onclick="sendChatMsg()">send</button>
 	</div>
 </body>
